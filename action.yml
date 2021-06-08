@@ -1,0 +1,68 @@
+name: 'Org Repo Scanner'
+description: 'Scans the organization repositories & then fetches the code metrics from Sonarcloud and generates a nice report.'
+branding:
+  icon: activity
+  color: orange
+inputs:
+  org:
+    description:
+      'The github organization'
+    required: true
+  token:
+    description:
+      'The github access token'
+    required: true
+  kind:
+    description:
+      'Kind of workflow [Currently supported: PIPELINE_GH_SONARCLOUD_MD_COMMIT]'
+    required: true
+  sonar-token:
+    description:
+      'Token for sonar cloud'
+    required: true
+  sonar-url:
+    description:
+      'Api URL for sonar cloud'
+    required: false
+    default: 'https://sonarcloud.io/'
+  sonar-org:
+    description:
+      'Org Key for sonar cloud'
+    required: true
+  sonar-format:
+    description:
+      'Project key format for sonar cloud'
+    required: false
+    default: '{0}_{1}'
+  md-file:
+    description:
+      'Name of markdown file'
+    required: false
+    default: 'README'
+outputs:
+  summary-title:
+    description:
+      'The title of the code metrics action.'
+  summary-details:
+    description:
+      'A detailed summary of the pull request.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - '-o'
+  - ${{ inputs.org }}
+  - '-t'
+  - ${{ inputs.token }}
+  - '-k'
+  - ${{ inputs.kind }}
+  - '-u'
+  - ${{ inputs.sonar-token }}
+  - '-a'
+  - ${{ inputs.sonar-url }}
+  - '-s'
+  - ${{ inputs.sonar-org }}
+  - '-f'
+  - ${{ inputs.sonar-format }}
+  - '-m'
+  - ${{ inputs.md-file }}

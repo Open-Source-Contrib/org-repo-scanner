@@ -34,6 +34,10 @@ namespace OrgRepoScanner.Core.Workflow
             {
                 codeUnit = await stage.ExecuteAsync(codeUnit);
             }
+            var title = $"[{DateTime.Now.ToString("dd MMM yyyy")}] - Organization Wide Code Metrics Updates";
+            var summary = $"[Total Repositories: {codeUnit.Count}] | [Metrics Found: {codeUnit.Count(x => x.CodeMetrics.Keys.Count > 0)}]";
+            Console.WriteLine($"::set-output name=summary-title::{title}");
+            Console.WriteLine($"::set-output name=summary-details::{summary}");
         }
 
         public Pipeline(string pipeLineKind, GithubOptions githubOptions, SonarcloudOptions sonarcloudOptions, MarkdownOutputOptions markdownOptions)
