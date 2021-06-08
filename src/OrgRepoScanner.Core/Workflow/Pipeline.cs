@@ -60,7 +60,9 @@ namespace OrgRepoScanner.Core.Workflow
         private void CreatePipelineGithubSonarCloudMarkdownCommit()
         {
             var githubClient = new GitHubClient(new ProductHeaderValue(githubOptions.Organization));
-            githubClient.Credentials = new Credentials("pradeep-singh-talabat", githubOptions.GithubToken);
+            
+            githubClient.Credentials = new Credentials(githubOptions.GithubToken);
+            Console.WriteLine("Github Token: {0}", githubOptions.GithubToken);
             var scannerStage = new GithubScannerPipelineStage(githubClient, githubOptions);
             var sonarcloudStage = new SonarcloudReaderPipelineStage(this.sonarcloudOptions);
             var markdownStage = new MarkdownOutputPipelineStage(this.markdownOptions);
