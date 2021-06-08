@@ -9,7 +9,8 @@ inputs:
       'The github organization'
     required: true
   gh-user:
-    description: 'The github user for scanning the organization.'
+    description:
+      'The github user scanning the organization - needed by github API'
     required: true
   token:
     description:
