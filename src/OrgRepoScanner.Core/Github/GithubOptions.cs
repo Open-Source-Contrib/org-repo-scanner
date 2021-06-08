@@ -10,5 +10,6 @@ namespace OrgRepoScanner.Core.Github
     {
         public string Organization { get; set; }
         public string GithubToken { get; set; }
+        public string GithubUser { get; set; }
     }
 }

@@ -12,6 +12,9 @@ namespace OrgRepoScanner.Runner
         [Option('o', "org", Required = true, HelpText = "The name of the github organization.")]
         public string OrganizationName { get; set; }
 
+        [Option('g', "gh-user", Required = true, HelpText = "The name of the github organization.")]
+        public string GithubUser { get; set; }
+
         [Option('t', "token", Required = true, HelpText = "The github token for calling github API.")]
         public string GithubToken { get; set; }
 

@@ -61,8 +61,8 @@ namespace OrgRepoScanner.Core.Workflow
         {
             var githubClient = new GitHubClient(new ProductHeaderValue(githubOptions.Organization));
             
-            githubClient.Credentials = new Credentials(githubOptions.GithubToken);
-            Console.WriteLine("Github Token: {0}", githubOptions.GithubToken);
+            githubClient.Credentials = new Credentials(githubOptions.GithubUser ,githubOptions.GithubToken);
+            Console.WriteLine("Github User: {0}\nGithub Token: {1}", githubOptions.GithubUser, githubOptions.GithubToken);
             var scannerStage = new GithubScannerPipelineStage(githubClient, githubOptions);
             var sonarcloudStage = new SonarcloudReaderPipelineStage(this.sonarcloudOptions);
             var markdownStage = new MarkdownOutputPipelineStage(this.markdownOptions);

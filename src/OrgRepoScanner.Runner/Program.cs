@@ -24,7 +24,7 @@ namespace OrgRepoScanner.Runner
             });
             await parser.WithParsedAsync(async inputs =>
             {
-                var githubOptions = new GithubOptions { GithubToken = inputs.GithubToken, Organization = inputs.OrganizationName };
+                var githubOptions = new GithubOptions { GithubToken = inputs.GithubToken, Organization = inputs.OrganizationName, GithubUser = inputs.GithubUser };
                 var sonarcloudOptions = new SonarcloudOptions
                 {
                     ApiBaseAddress = inputs.SonarApiUrl,
