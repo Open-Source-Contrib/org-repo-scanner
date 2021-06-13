@@ -1,4 +1,4 @@
-﻿using CommandLine;
+using CommandLine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +38,7 @@ namespace OrgRepoScanner.Runner
         [Option('n', "newrelic-key", Required = true, HelpText = "Key for New Relic API")]
         public string NewRelicKey { get; set; }
 
-        [Option('b', "newrelic-key", Required = true, HelpText = "Key for New Relic API")]
+        [Option('b', "newrelic-address", Required = true, HelpText = "Address for new relic API")]
         public string NewRelicApiBaseAddress { get; set; }
 
         [Option('i', "ingester", Required = true, HelpText = "Name of ingester to be passed to New relic logs")]
