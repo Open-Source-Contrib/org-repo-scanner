@@ -34,8 +34,8 @@ namespace OrgRepoScanner.Core.Output
             sb.AppendLine("|Reputation     |18-16      |   15-13        | 12-6     |5-0            |\n");
 
             sb.AppendLine("# Repositories Rankings\n\n");
-            sb.AppendLine("| Name | Description | Language | Reputation | Coverage | Critical Violations | Violations  | Code Smells | Conditions To Cover | Complexity |");
-            sb.AppendLine("| ---- | ----------- | -------- | ---------- |-------- | ------------------- | ----------- | ----------- | ------------------- | ---------- |");
+            sb.AppendLine("| Reputation | Name | Description | Language | Coverage | Critical Violations | Violations  | Code Smells | Conditions To Cover | Complexity |");
+            sb.AppendLine("| ---------- | ---- | ----------- | -------- |-------- | ------------------- | ----------- | ----------- | ------------------- | ---------- |");
             
             foreach (var item in codeUnit)
             {
@@ -63,7 +63,7 @@ namespace OrgRepoScanner.Core.Output
                 var complexityRank = item.CodeMetrics.ContainsKey("complexity_rank") 
                     ? $"<img src=\"icons/{item.CodeMetrics["complexity_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
                     : string.Empty;
-                sb.AppendLine($"| {name} | {description} | {language} | {reputationRank} | {coverageRank} | { criticalVoilationRank } | {voilationRank} | {codeSmellsRank} | {conditionsToCoverRank} | {complexityRank} |");
+                sb.AppendLine($"| {reputationRank} | {name} | {description} | {language} | {coverageRank} | { criticalVoilationRank } | {voilationRank} | {codeSmellsRank} | {conditionsToCoverRank} | {complexityRank} |");
             }
             await File.WriteAllTextAsync($"{markdownOutputOptions.OutputFileName}.md", sb.ToString());
             return codeUnit;
