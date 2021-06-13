@@ -1,4 +1,4 @@
-﻿using OrgRepoScanner.Core.Model;
+using OrgRepoScanner.Core.Model;
 using OrgRepoScanner.Core.Workflow;
 using System;
 using System.Collections.Generic;
@@ -26,13 +26,14 @@ namespace OrgRepoScanner.Core.Output
             if (codeUnit == null)
                 throw new Exception("No codeunits found!");
             var sb = new StringBuilder();
-            sb.AppendLine("# Organization Repo Scan Results\n\n");
+            sb.AppendLine("# Organization Repo Scan Results\n\n ## What Do The Badges Mean?\n\n");
             sb.AppendLine("|Type           | Captain   |   First mate   |  Sailor  |   Deck Swab   |");
             sb.AppendLine("|---------------|-----------|----------------|----------|---------------|");
             sb.AppendLine("|Badge |<img src=\"icons/captain.png\" alt=\"drawing\" style=\"width: 25px;\"/>|<img src=\"icons/firstmate.png\" alt=\"drawing\" style=\"width: 25px;\"/>|<img src=\"icons/sailor.png\" alt=\"drawing\" style=\"width: 25px;\"/>|<img src=\"icons/deckswab.png\" alt=\"drawing\" style=\"width: 25px; \"/>|");
             sb.AppendLine("|Metric Score   |3          |   2            | 1        |0              |");
             sb.AppendLine("|Reputation     |18-16      |   15-13        | 12-6     |5-0            |\n");
 
+            sb.AppendLine("# Repositories Rankings\n\n");
             sb.AppendLine("| Name | Description | Language | Reputation | Coverage | Critical Violations | Violations  | Code Smells | Conditions To Cover | Complexity |");
             sb.AppendLine("| ---- | ----------- | -------- | ---------- |-------- | ------------------- | ----------- | ----------- | ------------------- | ---------- |");
             
