@@ -43,6 +43,21 @@ inputs:
       'Name of markdown file'
     required: false
     default: 'README'
+  newrelic-key:
+    description:
+      'Key for New Relic API'
+    required: false
+    default: 'README'
+  newrelic-address:
+    description:
+      'Address for new relic API'
+    required: false
+    default: 'README'
+  ingester:
+    description:
+      'Name of ingester to be passed to New relic logs'
+    required: false
+    default: 'README'
 outputs:
   summary-title:
     description:
@@ -72,3 +87,9 @@ runs:
   - ${{ inputs.sonar-format }}
   - '-m'
   - ${{ inputs.md-file }}
+  - '-n'
+  - ${{ inputs.newrelic-key }}
+  - '-b'
+  - ${{ inputs.newrelic-address }}
+  - '-i'
+  - ${{ inputs.ingester }}
