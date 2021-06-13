@@ -21,8 +21,8 @@ namespace OrgRepoScanner.Core.Model
             if(obj is CodeUnit)
             {
                 var other = obj as CodeUnit;
-                var thisCoverage = this.CodeMetrics.ContainsKey("coverage") ? decimal.Parse(this.CodeMetrics["coverage"].ToString()) : 0m;
-                var otherCoverage = other.CodeMetrics.ContainsKey("coverage") ? decimal.Parse(other.CodeMetrics["coverage"].ToString()) : 0m;
+                var thisCoverage = this.CodeMetrics.ContainsKey("reputation_score") ? int.Parse(this.CodeMetrics["reputation_score"].ToString()) : 0m;
+                var otherCoverage = other.CodeMetrics.ContainsKey("reputation_score") ? int.Parse(other.CodeMetrics["reputation_score"].ToString()) : 0m;
                 return thisCoverage.CompareTo(otherCoverage);
             }
             throw new NotImplementedException();

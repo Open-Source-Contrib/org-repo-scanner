@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http.Json;
 using System.Linq;
-
+using OrgRepoScanner.Core.Rankings;
 namespace OrgRepoScanner.Core.Sonarcloud
 {
     public class SonarcloudReaderPipelineStage : IPipelineStage
@@ -42,6 +42,7 @@ namespace OrgRepoScanner.Core.Sonarcloud
                     {
                         item.CodeMetrics.Add(metric.Metric, metric.Value);
                     }
+                    item.CalculateRankings();
                 }
                 catch (Exception ex)
                 {

@@ -1,6 +1,7 @@
 ﻿using CommandLine;
 using Microsoft.Extensions.Hosting;
 using OrgRepoScanner.Core.Github;
+using OrgRepoScanner.Core.NewRelic;
 using OrgRepoScanner.Core.Output;
 using OrgRepoScanner.Core.Sonarcloud;
 using OrgRepoScanner.Core.Workflow;
@@ -32,8 +33,14 @@ namespace OrgRepoScanner.Runner
                     ProjectKeyFormat = inputs.SonarProjectKeyFormat,
                     Username = inputs.SonarToken
                 };
+                var newRelicOptions = new NewRelicMetricOptions
+                {
+                    ApiKey = inputs.NewRelicKey,
+                    IngesterName = inputs.IngesterName,
+                    ApiBaseAddress = inputs.NewRelicApiBaseAddress
+                };
                 var markdownOutputOptions = new MarkdownOutputOptions { OutputFileName = inputs.MarkdownFileName };
-                var pipeline = new Pipeline(inputs.PipelineKind, githubOptions, sonarcloudOptions, markdownOutputOptions);
+                var pipeline = new Pipeline(inputs.PipelineKind, githubOptions, sonarcloudOptions, markdownOutputOptions, newRelicOptions);
                 await pipeline.ExecuteAsync();
                 Environment.Exit(0);
             });

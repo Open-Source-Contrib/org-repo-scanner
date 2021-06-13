@@ -35,5 +35,14 @@ namespace OrgRepoScanner.Runner
         [Option('m', "md-file", Required = true, HelpText = "Name of markdown file")]
         public string MarkdownFileName { get; set; }
 
+        [Option('n', "newrelic-key", Required = true, HelpText = "Key for New Relic API")]
+        public string NewRelicKey { get; set; }
+
+        [Option('b', "newrelic-key", Required = true, HelpText = "Key for New Relic API")]
+        public string NewRelicApiBaseAddress { get; set; }
+
+        [Option('i', "ingester", Required = true, HelpText = "Name of ingester to be passed to New relic logs")]
+        public string IngesterName { get; set; }
+
     }
 }

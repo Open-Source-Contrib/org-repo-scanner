@@ -26,21 +26,43 @@ namespace OrgRepoScanner.Core.Output
             if (codeUnit == null)
                 throw new Exception("No codeunits found!");
             var sb = new StringBuilder();
-            sb.AppendLine("# Organization Repo Scan Results\n");
-            sb.AppendLine("| Name | Description | Language | Coverage | Critical Violations | Code Smells | Violations | Conditions To Cover | Complexity |");
-            sb.AppendLine("| ---- | ----------- | -------- | -------- | ------------------- | ----------- | ---------- | ------------------- | ---------- |");
+            sb.AppendLine("# Organization Repo Scan Results\n\n");
+            sb.AppendLine("|Type           | Captain   |   First mate   |  Sailor  |   Deck Swab   |");
+            sb.AppendLine("|---------------|-----------|----------------|----------|---------------|");
+            sb.AppendLine("|Badge |<img src=\"icons/captain.png\" alt=\"drawing\" style=\"width: 25px;\"/>|<img src=\"icons/firstmate.png\" alt=\"drawing\" style=\"width: 25px;\"/>|<img src=\"icons/sailor.png\" alt=\"drawing\" style=\"width: 25px;\"/>|<img src=\"icons/deckswab.png\" alt=\"drawing\" style=\"width: 25px; \"/>|");
+            sb.AppendLine("|Metric Score   |3          |   2            | 1        |0              |");
+            sb.AppendLine("|Reputation     |18-16      |   15-13        | 12-6     |5-0            |\n");
+
+            sb.AppendLine("| Name | Description | Language | Reputation | Coverage | Critical Violations | Violations  | Code Smells | Conditions To Cover | Complexity |");
+            sb.AppendLine("| ---- | ----------- | -------- | ---------- |-------- | ------------------- | ----------- | ----------- | ------------------- | ---------- |");
+            
             foreach (var item in codeUnit)
             {
                 var name = $"[{item.Name}]({item.Url})";
                 var description = item.Description;
                 var language = item.Language;
-                var coverageNumber = item.CodeMetrics.ContainsKey("coverage") ? decimal.Parse(item.CodeMetrics["coverage"].ToString()) : 0m;
-                var criticalVoilationseNumber = item.CodeMetrics.ContainsKey("critical_violations") ? int.Parse(item.CodeMetrics["critical_violations"].ToString()) : 0;
-                var codeSmellsNumber = item.CodeMetrics.ContainsKey("code_smells") ? int.Parse(item.CodeMetrics["code_smells"].ToString()) : 0;
-                var voilationsNumber = item.CodeMetrics.ContainsKey("violations") ? int.Parse(item.CodeMetrics["code_smells"].ToString()) : 0;
-                var conditionsToCoverNumber = item.CodeMetrics.ContainsKey("conditions_to_cover") ? int.Parse(item.CodeMetrics["conditions_to_cover"].ToString()) : 0;
-                var complexityNumber = item.CodeMetrics.ContainsKey("complexity") ? int.Parse(item.CodeMetrics["complexity"].ToString()) : 0;
-                sb.AppendLine($"| {name} | {description} | {language} | { FormatMetric(coverageNumber, 30m, 70m) } | { criticalVoilationseNumber } | {codeSmellsNumber} | {voilationsNumber} | {conditionsToCoverNumber} | {complexityNumber} |");
+                var reputationRank = item.CodeMetrics.ContainsKey("reputation_rank") 
+                    ? $"<img src=\"icons/{item.CodeMetrics["reputation_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
+                    : string.Empty;
+                var coverageRank = item.CodeMetrics.ContainsKey("coverage_rank") 
+                    ? $"<img src=\"icons/{item.CodeMetrics["coverage_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
+                    : string.Empty;
+                var criticalVoilationRank = item.CodeMetrics.ContainsKey("critical_violations_rank") 
+                    ? $"<img src=\"icons/{item.CodeMetrics["critical_violations_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
+                    : string.Empty;
+                var voilationRank = item.CodeMetrics.ContainsKey("voilations_rank") 
+                    ? $"<img src=\"icons/{item.CodeMetrics["voilations_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
+                    : string.Empty;
+                var codeSmellsRank = item.CodeMetrics.ContainsKey("code_smells_rank") 
+                    ? $"<img src=\"icons/{item.CodeMetrics["code_smells_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
+                    : string.Empty;
+                var conditionsToCoverRank = item.CodeMetrics.ContainsKey("conditions_to_cover_rank") 
+                    ? $"<img src=\"icons/{item.CodeMetrics["conditions_to_cover_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
+                    : string.Empty;
+                var complexityRank = item.CodeMetrics.ContainsKey("complexity_rank") 
+                    ? $"<img src=\"icons/{item.CodeMetrics["complexity_rank"].ToString().Replace(" ", "").ToLower()}.png\" alt=\"drawing\" style=\"width: 25px;\"/>" 
+                    : string.Empty;
+                sb.AppendLine($"| {name} | {description} | {language} | {reputationRank} | {coverageRank} | { criticalVoilationRank } | {voilationRank} | {codeSmellsRank} | {conditionsToCoverRank} | {complexityRank} |");
             }
             await File.WriteAllTextAsync($"{markdownOutputOptions.OutputFileName}.md", sb.ToString());
             return codeUnit;

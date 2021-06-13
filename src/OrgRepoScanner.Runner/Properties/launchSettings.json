@@ -2,7 +2,7 @@
   "profiles": {
     "OrgRepoScanner.Runner": {
       "commandName": "Project",
-      "commandLineArgs": "-o \"talabat-dhme\" -t \"TOKEN\" -k \"PIPELINE_GH_SONARCLOUD_MD_COMMIT\" -g \"GH_USER\" -u \"41b05e11baa9145b3ba2dfb654391fd2a448b752\" -s \"talabat-dhme\" -f \"{0}_{1}\" -a \"https://sonarcloud.io/\" -m \"README\""
+      "commandLineArgs": ""
     }
   }
 }
