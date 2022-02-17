@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Octokit;
 using Microsoft.Extensions.Options;
 using System.Linq;
-
+using System.IO;
 namespace OrgRepoScanner.Core.Github
 {
     public class GithubScannerPipelineStage : IPipelineStage
@@ -38,7 +38,7 @@ namespace OrgRepoScanner.Core.Github
                 Language = x.Language,
                 Stars = x.StargazersCount,
                 Watchers = x.WatchersCount,
-                Url = x.Url
+                Url = Path.Join("https://github.com", (new Uri(x.Url)).LocalPath.Replace("/repos", ""))
             }).ToList();
             return codeUnit;
         }
